@@ -24,7 +24,7 @@ class rep:
             self.verificarDirectorio()
             # CREA DIRECTORIO EN CASO NO EXISTA
             directorio = os.path.split(self.path)
-            os.makedirs(directorio[0], exist_ok=True)
+            os.makedirs(directorio[0], mode=0o777, exist_ok=True)
             # CREO EL REPORTE SEGUN SU NAME
             if (self.name == "mbr"):
                 self.make_Rmbr(directorio)
@@ -61,7 +61,7 @@ class rep:
         self.verificarDirectorio()
         # CREA DIRECTORIO EN CASO NO EXISTA
         directorio = os.path.split(self.path)
-        os.makedirs(directorio[0], exist_ok=True)
+        os.makedirs(directorio[0], mode=0o777, exist_ok=True)
         #OBTIENE EL PATH DEL DISCO POR MEDIO DEL ID, OBTIENE EL MBR
         path_Disco = self.obtener_path()
         if(path_Disco != ""):
@@ -95,7 +95,7 @@ class rep:
         self.verificarDirectorio()
         # CREA DIRECTORIO EN CASO NO EXISTA
         directorio = os.path.split(self.path)
-        os.makedirs(directorio[0], exist_ok=True)
+        os.makedirs(directorio[0], mode=0o777, exist_ok=True)
         #OBTIENE EL PATH DEL DISCO POR MEDIO DEL ID, OBTIENE EL MBR
         path_Disco = self.obtener_path()
         if(path_Disco != ""):
@@ -135,7 +135,7 @@ class rep:
         self.verificarDirectorio()
         # CREA DIRECTORIO EN CASO NO EXISTA
         directorio = os.path.split(self.path)
-        os.makedirs(directorio[0], exist_ok=True)
+        os.makedirs(directorio[0], mode=0o777, exist_ok=True)
         #OBTIENE EL PATH DEL DISCO POR MEDIO DEL ID, OBTIENE EL SUPER BLOQUE
         path_Disco = self.obtener_path()
         if(path_Disco != ""):

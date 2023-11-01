@@ -38,7 +38,7 @@ class mkdisk:
                         self.verificarDirectorio()
                         # CREA DIRECTORIO EN CASO NO EXISTA
                         directorio = os.path.split(self.path)
-                        os.makedirs(directorio[0], exist_ok=True)
+                        os.makedirs(directorio[0], mode=0o777, exist_ok=True)
                         # CREO EL DISCO CON TODAS LAS VALIDACIONES
                         with open(self.path, "wb") as file:
                             for i in range(0,self.size):
