@@ -6,6 +6,7 @@ class rmdisk:
 
     def __init__(self):
         self.path = "" #string
+        self.resp = "" #string
 
     def make_rmdisk(self):
         #SI EL PARAMETRO NO ESTA VACIO
@@ -44,7 +45,7 @@ class rmdisk:
             palabra = ""
         if(list_dir[1]  == "home"):
             if(list_dir[2] == "user"):
-                list_dir[2] = "ubuntu"
+                list_dir[2] = "cecic"
                 list_dir.remove(list_dir[0])
                 for l in list_dir:
                     palabra = palabra +"/"+ l
@@ -52,21 +53,27 @@ class rmdisk:
                 palabra = ""
         list_dir = self.path.split('/')
         if(list_dir[1]  == "home"):
-            if(list_dir[2] != "ubuntu"):
-                list_dir.insert(2,"ubuntu")
+            if(list_dir[2] != "cecic"):
+                list_dir.insert(2,"cecic")
                 list_dir.remove(list_dir[0])
                 for l in list_dir:
                     palabra = palabra +"/"+ l
                 self.path = palabra
 
     def confirmar_eliminacion(self):
-        response = str(input("Alerta!!, se necesita confirmación para eliminar disco [s/n]: "+"\n")).lower()
-        if(response == 's'):
+        if(self.resp == ""):
+            singleton.objL.respuesta['estado']= "201"
+            singleton.objL.respuesta['mensaje']+= " Alerta!!, se necesita confirmación para eliminar disco..."+"\n"
+        else:
+            self.ejecutar_resp()
+        
+        
+    def ejecutar_resp(self):
+        if(self.resp == 'si'):
             os.remove(self.path)
+            singleton.objL.respuesta['estado'] = "202"
             singleton.objL.respuesta['mensaje']+= ">>>>Disco eliminado exitosamente!>>>>\n"
             print("*****************************************************************************")
-        elif(response == 'n'):
+        elif(self.resp == 'no'):
             singleton.objL.respuesta['mensaje']+= ">>>>Eliminación del disco cancelada>>>>\n"
             print("*****************************************************************************")
-        else:
-            self.confirmar_eliminacion()

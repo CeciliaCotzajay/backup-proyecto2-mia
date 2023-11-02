@@ -42,5 +42,26 @@ def get_first_word():
     #time.sleep(1)
     return jsonify(singleton.objL.respuesta)
 
+@app.route('/resp', methods=['POST'])
+def get_first_word2():
+    data = request.get_json()
+    message0 = data.get('command', '')
+    message = message0.lower()
+    print(message)
+    # Dividir el mensaje en palabras
+    words = message.split()
+    an = analizador()
+    if words:
+        singleton.objL.respuesta['mensaje'] = ""
+        singleton.objL.respuesta['mensaje']+= message + "\n"
+        an.analizar(message)
+    else:
+        singleton.objL.respuesta['mensaje'] = ""
+        singleton.objL.respuesta['mensaje']+= "No se encontraron palabras en el mensaje.\n"
+    # Esperamos 1 segundo, para simular proceso de ejecución
+    #time.sleep(1)
+    return jsonify(singleton.objL.respuesta)
+
+
 if __name__ == '__main__':
     app.run(debug=True)

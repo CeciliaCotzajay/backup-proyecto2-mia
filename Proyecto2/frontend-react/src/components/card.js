@@ -49,7 +49,20 @@ function Card() {
                         body: JSON.stringify({ command }),
                     });
                     const data = await response.json();
+                    console.log(data)
+                    console.log("rrrrrrrr")
+                    console.log(data.mensaje)
+                    console.log("dddddddd")
                     setResults(prevResults => prevResults + `${data.mensaje}\n`);
+                    if (data.estado == "201") {
+                        console.log("si")
+                        var resultado = window.confirm('¿Está seguro de eliminar el disco? \n Por favor confirme...');
+                        if (resultado === true) {
+                            enviarConfirmacion(command+" -resp=si");
+                        } else { 
+                            enviarConfirmacion(command+" -resp=no");
+                        }
+                    }
                 } catch (error) {
                     console.error(`Error en la solicitud ${i + 1}: ${error}`);
                 }
@@ -69,6 +82,31 @@ function Card() {
         sendCommands(commandLines);
     };
 
+    const enviarConfirmacion = async (resp) => {
+        try {
+            console.log("envio correcto")
+            console.log(resp)
+            const response = await fetch(apiUrl +'/resp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 'command': resp }),
+            });
+            console.log("recibio")
+            const data = await response.json();
+            console.log(data)
+            if (data.estado == "202") {
+                console.log("eliminado")
+                window.alert('Disco eliminado exitosamente');
+            }else{
+                window.alert('ELiminación cancelada..');
+            }
+            setResults(prevResults => prevResults + `${data.mensaje}\n`);
+        } catch (error) {
+            console.error("Error en la solicitud");
+        }
+    };
 
   return (
     <div className="card mt-4 text-info bg-dark">

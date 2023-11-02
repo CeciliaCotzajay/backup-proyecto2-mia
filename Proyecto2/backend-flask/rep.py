@@ -289,7 +289,7 @@ class rep:
             palabra = ""
         if(list_dir[1]  == "home"):
             if(list_dir[2] == "user"):
-                list_dir[2] = "ubuntu"
+                list_dir[2] = "cecic"
                 list_dir.remove(list_dir[0])
                 for l in list_dir:
                     palabra = palabra +"/"+ l
@@ -297,9 +297,9 @@ class rep:
                 palabra = ""
         list_dir = self.path.split('/')
         if(list_dir[1]  == "home"):
-            if(list_dir[2] != "ubuntu"):
+            if(list_dir[2] != "cecic"):
                 singleton.objL.respuesta['mensaje']+= ">Creando directorios\n"
-                list_dir.insert(2,"ubuntu")
+                list_dir.insert(2,"cecic")
                 #print("insertado, corregido")
                 list_dir.remove(list_dir[0])
                 for l in list_dir:

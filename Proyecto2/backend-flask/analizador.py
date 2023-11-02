@@ -44,7 +44,9 @@ class analizador:
             valor = param[1]
              #VERIFICA CUAL PARAMETRO ES PARA INICIALIZAR EL OBTJETO (LOS PARAMETROS YA VIENEN EN LOWERCASE)
             if (tipo == "path"):
-                disco.path = valor 
+                disco.path = valor
+            elif (tipo == "resp"):
+                disco.resp = valor  
             else:
                 singleton.objL.respuesta['mensaje']+= ">>>>Error: parámetro no aceptado en 'rmdisk': "+valor.upper()+">>>>\n"
                 print("*****************************************************************************")
