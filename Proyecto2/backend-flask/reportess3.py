@@ -10,7 +10,7 @@ class reportess3:
     #archivo_dot = "reporte.dot"
     archivo_png1 = "reporte.png"
     # Define las credenciales directamente en el código
-    load_dotenv('.env')
+    load_dotenv('my.env')
     aws_access_key_id = os.getenv('ACCESS_ID')
     aws_secret_access_key = os.getenv('SECRET_ID')
     bucket_name = os.getenv('BUCKET_NAME')
