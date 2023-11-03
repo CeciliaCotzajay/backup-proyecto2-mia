@@ -98,9 +98,9 @@ function Card() {
             console.log(data)
             if (data.estado == "202") {
                 console.log("eliminado")
-                window.alert('Disco eliminado exitosamente');
+                window.alert('>>Disco eliminado exitosamente...');
             }else{
-                window.alert('ELiminación cancelada..');
+                window.alert('>>ELiminación cancelada..');
             }
             setResults(prevResults => prevResults + `${data.mensaje}\n`);
         } catch (error) {
