@@ -82,7 +82,7 @@ class rep:
             #OBTIENE LA DATA DE LAS PARTICIONES
             self.data_partitionsMBR(dic_data,mbr,path_Disco,name_disk)
             #LLAMAR METODO TABLA PASARLE EL DICCIONARIO Y EL COLOR
-            self.reporte_tabla(dic_data,color)
+            self.reporte_tabla(dic_data,color, directorio[1])
             singleton.objL.respuesta['mensaje']+= ">>>>Reporte MBR generado exitosamente!>>>>"+"\n"
             print("*****************************************************************************")
         else:
@@ -184,7 +184,7 @@ class rep:
             dic_data[name_disk].append(str(super_bloque.b_start))
             dic_data[name_disk].append(str(super_bloque.magic))
             #LLAMAR METODO TABLA PASARLE EL DICCIONARIO Y EL COLOR
-            self.reporte_tabla(dic_data,color)
+            self.reporte_tabla(dic_data,color,directorio[1])
             singleton.objL.respuesta['mensaje']+= ">>>>Reporte SUPER BLOQUE generado exitosamente!>>>>"+"\n"
             print("*****************************************************************************")
         else:
@@ -203,7 +203,7 @@ class rep:
 #**********************************************************************************************
 #***********************************METODOS_SECUNDARIOS****************************************
 #**********************************************************************************************
-    def reporte_tabla(self,data,color):
+    def reporte_tabla(self,data,color,namer):
         # ESQUEMA DEL DOCUMENTO
         layout ="""        
         <html><head>
@@ -244,12 +244,16 @@ class rep:
         dt = data
         df = pd.DataFrame(data=dt)
         cuadro = layout % df.to_html(index=False,justify='center')
+        #SE GUARDA EN LA VARIABLE JSON (OPCION 2 - D3JS REACT-O-FRONT)
+        
         #CREA ARCHIVO TIPO PNG O JPG Y PEGA LA TABLA
         imgkit.from_string(cuadro, self.path, {"xvfb": ""})
         img = Image.new('RGB', (800, 1000), color = '#000080')
         draw = ImageDraw.Draw(img)
         img_tabla = Image.open(self.path)
         img.paste(img_tabla, (50, 40), img_tabla)
+        singleton.objL.list_pathsReports.append(self.path)
+        singleton.objL.list_nameReports.append(namer)
 
     def obtener_path(self):
         path_en = ""
@@ -417,6 +421,10 @@ class rep:
             file.write(contenido)
         #GENERA LA IMAGEN
         os.system('dot -T'+disklist[1]+' '+dir_completo+' -o '+directorio[0]+'/'+directorio[1])
+        path_completo = directorio[0]+'/'+directorio[1]
+        singleton.objL.list_pathsReports.append(path_completo)
+        singleton.objL.list_nameReports.append(directorio[1])
+
 
     def obtener_SuperBloque(self,path_Disco):
         superb = superBloque()

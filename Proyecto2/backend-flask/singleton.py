@@ -6,6 +6,7 @@ class singleton(object):
     }
     # LISTA DE PATHS REPORTES
     list_pathsReports = []
+    list_nameReports = []
     # LISTA DE MOUNTS: PARTICIONES
     list_Mounts = []
     # LISTA DE MOUNTS: DISCOS (FORMATEADOS)
