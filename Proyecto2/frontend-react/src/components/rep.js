@@ -40,6 +40,7 @@ function Rep() {
     for (let i = 0; i < claves.length; i++) {
       claves[i] = urlImage + '/'+claves[i]; 
     }
+    console.log(claves)
     setimageUrl(claves)
     console.log(imageUrl)
     console.log("deberia verse la imagenes")
