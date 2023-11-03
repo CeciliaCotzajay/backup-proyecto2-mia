@@ -24,6 +24,7 @@ function Rep() {
         window.alert('>>Reportes generados exitosamente...');
         console.log(data.report)
         setotroDic(data.report)
+        console.log(otroDic)
       }else{
         window.alert('>>Ocurrio un error al cargar reportes...');
         console.log("error no reconocio algo en reportes o no hay paths")
@@ -34,10 +35,12 @@ function Rep() {
   };
 
   const guardarUrls = () => {
-    const claves = Object.keys(otroDic);
-    const claves_mod = claves.map((clave) => {
-      return urlImage+`${clave}`;}); 
-    setimageUrl(claves_mod)
+    let claves = Object.keys(otroDic);
+    console.log(claves)
+    for (let i = 0; i < claves.length; i++) {
+      claves[i] = urlImage + '/'+claves[i]; 
+    }
+    setimageUrl(claves)
     console.log(imageUrl)
     console.log("deberia verse la imagenes")
 };

@@ -30,7 +30,7 @@ class reportess3:
         if(singleton.objL.list_pathsReports):
             for i1, i2 in zip(singleton.objL.list_pathsReports, singleton.objL.list_nameReports):
                 # Sube el archivo al bucket
-                s3.upload_file(i1, self.bucket_name, 'images/' + i2)
+                s3.upload_file(i1, self.bucket_name, i2)
                 print(f"Se ha subido {i1} a {self.bucket_name}")
                 print("*****************************************************************************")
         else:
